@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profeta Experience — Confirmação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0b;
+    --bg-soft:#141414;
+    --gold:#7c2f3a;
+    --gold-dim:rgba(124,47,58,.35);
+    --marsala:#7c2f3a;
+    --text:#f4f2ec;
+    --text-dim:rgba(244,242,236,.62);
+    --line:rgba(244,242,236,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:40px 24px 60px;
+    position:relative;
+    overflow:hidden;
+  }
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:.02em;}
+  a{color:inherit;text-decoration:none;}
+
+  /* Linhas decorativas laterais — igual ao site */
+  .deco-line{
+    position:fixed;
+    width:1px;
+    top:0;bottom:0;
+    background:linear-gradient(to bottom,transparent,var(--line),transparent);
+    pointer-events:none;
+  }
+  .deco-line.left{left:8vw;}
+  .deco-line.right{right:8vw;}
+
+  /* Card central */
+  .card{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    max-width:460px;
+    width:100%;
+    padding:56px 44px;
+    border:1px solid var(--line);
+    background:var(--bg-soft);
+    animation:fadeUp .8s ease forwards;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+  /* Diamante decorativo — igual ao divider do site */
+  .divider-diamond{
+    width:9px;height:9px;
+    background:var(--gold);
+    transform:rotate(45deg);
+    margin:0 auto 32px;
+  }
+
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-bottom:12px;
+  }
+
+  h2{
+    font-size:clamp(1.8rem,3.5vw,2.5rem);
+    text-transform:uppercase;
+    line-height:1.1;
+    margin-bottom:6px;
+  }
+  h2 em{color:var(--gold);font-style:italic;}
+
+  /* Divider linha */
+  .line-sep{
+    width:48px;height:1px;
+    background:var(--line);
+    margin:28px auto;
+  }
+
+  .message{
+    font-size:.92rem;
+    color:var(--text-dim);
+    line-height:1.75;
+    margin-bottom:0;
+  }
+  .message strong{color:var(--text);font-weight:400;}
+
+  /* Resumo do plano */
+  .plan-row{
+    margin:28px 0;
+    padding:18px 20px;
+    border:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .plan-row-label{
+    font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--text-dim);text-align:left;
+  }
+  .plan-row-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1rem;margin-top:2px;
+    text-align:left;
+  }
+  .plan-row-price{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.6rem;
+    color:var(--marsala);
+    white-space:nowrap;
+    text-align:right;
+  }
+  .plan-row-price small{
+    font-family:'Jost',sans-serif;
+    font-size:.68rem;color:var(--text-dim);
+    display:block;letter-spacing:.04em;
+  }
+
+  /* Botões */
+  .actions{display:flex;flex-direction:column;gap:12px;margin-top:28px;}
+
+  .btn-whats{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--marsala);
+    color:#fff;
+    padding:15px 24px;
+    border:1px solid var(--marsala);
+    font-family:'Jost',sans-serif;
+    font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+    font-weight:500;
+    transition:background .3s,color .3s;
+    cursor:pointer;
+  }
+  .btn-whats:hover{background:transparent;color:var(--marsala);}
+
+  .btn-home{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    border:1px solid var(--gold-dim);
+    color:var(--text-dim);
+    padding:14px 24px;
+    font-family:'Jost',sans-serif;
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    transition:border-color .3s,color .3s,background .3s;
+  }
+  .btn-home:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* Footer */
+  .footer-bar{
+    position:fixed;bottom:0;left:0;right:0;
+    border-top:1px solid var(--line);
+    padding:14px 6vw;
+    text-align:center;
+    font-size:.64rem;
+    color:rgba(244,242,236,.18);
+    letter-spacing:.06em;
+    background:var(--bg);
+    z-index:10;
+  }
+  .footer-bar a{color:var(--gold);opacity:.5;}
+  .footer-bar .credit-dot{
+    width:5px;height:5px;border-radius:50%;
+    background:#5b84c4;display:inline-block;vertical-align:middle;margin:0 4px;
+  }
+  .footer-bar .credit-brand{color:#7fa3d6;}
+
+  @media(max-width:480px){
+    .card{padding:40px 22px;}
+    .plan-row{flex-direction:column;text-align:center;}
+    .plan-row-label,.plan-row-name{text-align:center;}
+    .plan-row-price small{text-align:center;}
+    .deco-line{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="deco-line left"></div>
+<div class="deco-line right"></div>
+
+<div class="card">
+
+  <div class="divider-diamond"></div>
+
+  <span class="eyebrow">Assinatura confirmada</span>
+
+  <h2>Bem-vindo ao <em>Clube</em></h2>
+
+  <div class="line-sep"></div>
+
+  <p class="message">
+    Sua assinatura foi ativada com sucesso.<br>
+    Você receberá um <strong>e-mail de confirmação</strong> em instantes com todos os detalhes do seu plano.
+  </p>
+
+  <div class="plan-row">
+    <div>
+      <div class="plan-row-label">Plano ativo</div>
+      <div class="plan-row-name">Profeta Experience</div>
+    </div>
+    <div class="plan-row-price">
+      R$289
+      <small>/ mês</small>
+    </div>
+  </div>
+
+  <p class="message" style="font-size:.85rem;">
+    Agende agora seu <strong>primeiro atendimento VIP</strong> pelo WhatsApp. Nossa equipe está pronta para te receber com prioridade.
+  </p>
+
+  <div class="actions">
+    <a href="https://wa.me/554430472098?text=Ol%C3%A1!%20Acabei%20de%20assinar%20o%20Profeta%20Experience%20e%20gostaria%20de%20agendar%20meu%20primeiro%20atendimento." class="btn-whats" target="_blank" rel="noopener">
+      Agendar pelo WhatsApp ↗
+    </a>
+    <a href="index.html" class="btn-home">
+      Voltar ao site
+    </a>
+  </div>
+
+</div>
+
+<div class="footer-bar">
+  Desenvolvido por <a href="#">Paes Technology</a>
+  <span class="credit-dot"></span>
+  <span class="credit-brand">Barbearia Profeta</span> © 2026
+</div>
+
+</body>
+</html>
