@@ -90,6 +90,17 @@
   .dot-nav button.active{background:var(--marsala);transform:scale(1.4);}
   .dot-nav button:hover{background:var(--gold);}
 
+  .credit-bar-fixed{
+    position:fixed;left:20px;bottom:16px;z-index:60;
+    font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+    color:rgba(244,242,236,.4);
+  }
+  .credit-bar-fixed a{color:inherit;text-decoration:none;transition:color .25s;}
+  .credit-bar-fixed a:hover{color:var(--gold);}
+  @media (max-width:768px){
+    .credit-bar-fixed{font-size:.55rem;left:14px;bottom:10px;}
+  }
+
   /* ---------- Scroll cue ---------- */
   .scroll-cue{
     position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
@@ -294,6 +305,10 @@
     });
   });
 </script>
+
+<div class="credit-bar-fixed">
+  <a href="#" target="_blank" rel="noopener">Desenvolvido por Paes Technology</a>
+</div>
 
 </body>
 </html>
