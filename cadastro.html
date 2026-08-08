@@ -530,7 +530,7 @@ document.getElementById('btn-step2').addEventListener('click',async()=>{
   };
 
   try{
-    const res=await fetch( https://profetamaringa.netlify.app/.netlify/functions/asaas-subscribe',{
+    const res=await fetch('https://profetamaringa.netlify.app/.netlify/functions/asaas-subscribe',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(payload)
