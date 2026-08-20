@@ -247,10 +247,12 @@
   /* ---------- Profissionais: Esteira rodando ---------- */
   .team-marquee-wrap{
     width:100%;overflow:hidden;margin-top:40px;
+    cursor:grab;user-select:none;-webkit-user-select:none;touch-action:pan-y;
   }
+  .team-marquee-wrap:active{cursor:grabbing;}
   .team-marquee-track{
     display:flex;gap:2px;width:max-content;
-    animation:teamMarqueeScroll 55s linear infinite;
+    will-change:transform;
   }
   .team-marquee-cell{
     position:relative;flex-shrink:0;width:220px;aspect-ratio:3/4;
@@ -260,18 +262,16 @@
     width:100%;height:100%;object-fit:cover;display:block;
     filter:grayscale(.4) brightness(.75);
     transition:filter .5s ease,transform .7s ease;
+    pointer-events:none;
   }
   .team-marquee-cell:hover img{filter:grayscale(0) brightness(1);transform:scale(1.06);}
   .team-marquee-cap{
     position:absolute;left:0;right:0;bottom:0;padding:14px 16px;
     background:linear-gradient(to top,rgba(11,11,11,.92),transparent 80%);
+    pointer-events:none;
   }
   .team-marquee-cap h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;color:var(--text);}
   .team-marquee-cap span{font-size:.65rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;}
-  @keyframes teamMarqueeScroll{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
-  }
   @media (max-width:768px){
     .team-marquee-cell{width:150px;}
   }
@@ -1088,10 +1088,71 @@
     });
   }
 
-  // Esteira de profissionais
-  document.querySelectorAll('.team-marquee-cell').forEach(cell => {
-    cell.addEventListener('click', () => openTeamModal(cell.dataset.team));
-  });
+  // Esteira de profissionais: giro automático + arrasto com mouse/dedo
+  (function () {
+    const wrap = document.querySelector('.team-marquee-wrap');
+    const track = document.getElementById('teamMarqueeTrack');
+    if (!wrap || !track) return;
+
+    let setWidth = track.scrollWidth / 2; // metade, pois o conteúdo está duplicado
+    window.addEventListener('resize', () => { setWidth = track.scrollWidth / 2; });
+
+    let pos = 0;
+    const autoSpeed = 0.4; // px por frame, giro lento padrão
+    let dragging = false;
+    let dragged = false;
+    let startX = 0;
+    let startPos = 0;
+
+    function normalize() {
+      if (setWidth <= 0) return;
+      while (pos <= -setWidth) pos += setWidth;
+      while (pos > 0) pos -= setWidth;
+    }
+
+    function frame() {
+      if (!dragging) {
+        pos -= autoSpeed;
+        normalize();
+        track.style.transform = `translateX(${pos}px)`;
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    function pointerDown(x) {
+      dragging = true;
+      dragged = false;
+      startX = x;
+      startPos = pos;
+    }
+    function pointerMove(x) {
+      if (!dragging) return;
+      const delta = x - startX;
+      if (Math.abs(delta) > 4) dragged = true;
+      pos = startPos + delta;
+      normalize();
+      track.style.transform = `translateX(${pos}px)`;
+    }
+    function pointerUp() {
+      dragging = false;
+    }
+
+    wrap.addEventListener('mousedown', (e) => pointerDown(e.clientX));
+    window.addEventListener('mousemove', (e) => pointerMove(e.clientX));
+    window.addEventListener('mouseup', pointerUp);
+
+    wrap.addEventListener('touchstart', (e) => pointerDown(e.touches[0].clientX), { passive: true });
+    wrap.addEventListener('touchmove', (e) => pointerMove(e.touches[0].clientX), { passive: true });
+    wrap.addEventListener('touchend', pointerUp);
+
+    document.querySelectorAll('.team-marquee-cell').forEach(cell => {
+      cell.addEventListener('click', () => {
+        if (dragged) return;
+        openTeamModal(cell.dataset.team);
+      });
+    });
+  })();
 
   // Pop-ups de serviços (Barbearia, Estética, SPA/Podologia, Clínica)
   const servicesData = {
