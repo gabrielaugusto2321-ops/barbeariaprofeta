@@ -731,6 +731,38 @@ document.getElementById('btn-step2').addEventListener('click',async()=>{
     });
     const data=await res.json();
     if(res.ok&&data.success){
+      // Assinatura confirmada no Asaas. Agora grava o contrato assinado
+      // e a autorização de imagem no Supabase. Isso não bloqueia o redirect
+      // mesmo se falhar, porque o pagamento já foi concluído.
+      try{
+        const planoParam=new URLSearchParams(window.location.search).get('plano')||'legacy-289';
+        const imageAuthEl=document.querySelector('input[name="image-auth"]:checked');
+        const contractPayload={
+          plano:planoParam,
+          name:payload.name,
+          email:payload.email,
+          cpf:payload.cpf,
+          rg:document.getElementById('rg').value.trim(),
+          estadoCivil:document.getElementById('estado-civil').value.trim(),
+          profissao:document.getElementById('profissao').value.trim(),
+          endereco:document.getElementById('endereco').value.trim(),
+          cidade:document.getElementById('cidade').value.trim(),
+          estado:document.getElementById('estado').value.trim(),
+          cep:document.getElementById('cep').value.replace(/\D/g,''),
+          phone:payload.phone,
+          contractHtml:document.querySelectorAll('.terms-scroll')[0].innerHTML,
+          contractVersion:'v1',
+          imageAuthorized:imageAuthEl?imageAuthEl.value==='autorizo':false,
+          asaasSubscriptionId:data.subscriptionId||null,
+        };
+        await fetch('https://profetamaringa.netlify.app/.netlify/functions/save-contract',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify(contractPayload)
+        });
+      }catch(saveErr){
+        console.error('Falha ao gravar contrato no Supabase (pagamento já confirmado):',saveErr);
+      }
       window.location.href='confirmacao.html';
     }else{
       throw new Error(data.error||data.message||'Erro ao processar o pagamento.');
