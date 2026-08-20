@@ -244,7 +244,29 @@
   }
   .center-btn{text-align:center;margin-top:52px;}
 
-  /* ---------- Profissionais: Carrossel 3D ---------- */
+  /* ---------- Profissionais: Grid estático ---------- */
+  .team-static-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;
+  }
+  .team-static-card{
+    background:none;border:1px solid var(--line);padding:0;margin:0;cursor:pointer;
+    font-family:inherit;color:inherit;text-align:left;position:relative;overflow:hidden;
+    aspect-ratio:3/4;transition:border-color .3s ease;
+  }
+  .team-static-card:hover{border-color:var(--gold-dim);}
+  .team-static-card img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85;transition:opacity .4s ease,transform .5s ease;}
+  .team-static-card:hover img{opacity:1;transform:scale(1.04);}
+  .team-static-cap{
+    position:absolute;left:0;right:0;bottom:0;padding:16px 18px;
+    background:linear-gradient(to top,rgba(11,11,11,.92),transparent 80%);
+  }
+  .team-static-cap h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;color:var(--text);}
+  .team-static-cap span{font-size:.68rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;}
+  @media (max-width:768px){
+    .team-static-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
+  }
+
+  /* ---------- Profissionais: Carrossel 3D (não usado mais, mantido por segurança) ---------- */
   .carousel-3d-wrap{
     width:100%;height:420px;margin-top:20px;
     display:flex;align-items:center;justify-content:center;
@@ -800,20 +822,18 @@
     <div class="section-head reveal">
       <span class="eyebrow">Nossa equipe</span>
       <h2>Profissionais</h2>
-      <p>Passe o mouse ou arraste para girar. Toque em qualquer profissional para ver detalhes.</p>
+      <p>Toque em qualquer profissional para ver detalhes.</p>
     </div>
-  </div>
-  <div class="carousel-3d-wrap reveal">
-    <div class="carousel-3d" id="carousel3d">
-      <div class="carousel-item" data-team="angelica"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80" alt="Angélica"><div class="carousel-cap"><h4>Angélica</h4><span>Esteticista</span></div></div>
-      <div class="carousel-item" data-team="eduardo"><img src="https://images.unsplash.com/photo-1618077360395-f3068be8e001?auto=format&fit=crop&w=400&q=80" alt="Eduardo"><div class="carousel-cap"><h4>Eduardo</h4><span>Barbeiro</span></div></div>
-      <div class="carousel-item" data-team="emanuel"><img src="https://images.unsplash.com/photo-1584999734482-0361aecad844?auto=format&fit=crop&w=400&q=80" alt="Emanuel"><div class="carousel-cap"><h4>Emanuel</h4><span>Barbeiro</span></div></div>
-      <div class="carousel-item" data-team="felipe"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" alt="Felipe"><div class="carousel-cap"><h4>Felipe</h4><span>Barbeiro</span></div></div>
-      <div class="carousel-item" data-team="gabriel"><img src="https://images.unsplash.com/photo-1622296089863-eb7fc530daa8?auto=format&fit=crop&w=400&q=80" alt="Gabriel"><div class="carousel-cap"><h4>Gabriel</h4><span>Barbeiro</span></div></div>
-      <div class="carousel-item" data-team="heloisa"><img src="https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?auto=format&fit=crop&w=400&q=80" alt="Heloísa"><div class="carousel-cap"><h4>Heloísa</h4><span>Esteticista</span></div></div>
-      <div class="carousel-item" data-team="lucas"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="Lucas"><div class="carousel-cap"><h4>Lucas</h4><span>Barbeiro</span></div></div>
-      <div class="carousel-item" data-team="rafael"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80" alt="Rafael"><div class="carousel-cap"><h4>Rafael</h4><span>Biomédico</span></div></div>
-      <div class="carousel-item" data-team="simone"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=400&q=80" alt="Simone"><div class="carousel-cap"><h4>Simone</h4><span>Podóloga</span></div></div>
+    <div class="team-static-grid reveal">
+      <button class="team-static-card" type="button" data-team="angelica"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80" alt="Angélica"><div class="team-static-cap"><h4>Angélica</h4><span>Esteticista</span></div></button>
+      <button class="team-static-card" type="button" data-team="eduardo"><img src="https://images.unsplash.com/photo-1618077360395-f3068be8e001?auto=format&fit=crop&w=400&q=80" alt="Eduardo"><div class="team-static-cap"><h4>Eduardo</h4><span>Barbeiro</span></div></button>
+      <button class="team-static-card" type="button" data-team="emanuel"><img src="https://images.unsplash.com/photo-1584999734482-0361aecad844?auto=format&fit=crop&w=400&q=80" alt="Emanuel"><div class="team-static-cap"><h4>Emanuel</h4><span>Barbeiro</span></div></button>
+      <button class="team-static-card" type="button" data-team="felipe"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" alt="Felipe"><div class="team-static-cap"><h4>Felipe</h4><span>Barbeiro</span></div></button>
+      <button class="team-static-card" type="button" data-team="gabriel"><img src="https://images.unsplash.com/photo-1622296089863-eb7fc530daa8?auto=format&fit=crop&w=400&q=80" alt="Gabriel"><div class="team-static-cap"><h4>Gabriel</h4><span>Barbeiro</span></div></button>
+      <button class="team-static-card" type="button" data-team="heloisa"><img src="https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?auto=format&fit=crop&w=400&q=80" alt="Heloísa"><div class="team-static-cap"><h4>Heloísa</h4><span>Esteticista</span></div></button>
+      <button class="team-static-card" type="button" data-team="lucas"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="Lucas"><div class="team-static-cap"><h4>Lucas</h4><span>Barbeiro</span></div></button>
+      <button class="team-static-card" type="button" data-team="rafael"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80" alt="Rafael"><div class="team-static-cap"><h4>Rafael</h4><span>Biomédico</span></div></button>
+      <button class="team-static-card" type="button" data-team="simone"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=400&q=80" alt="Simone"><div class="team-static-cap"><h4>Simone</h4><span>Podóloga</span></div></button>
     </div>
   </div>
 </section>
@@ -1042,75 +1062,10 @@
     });
   }
 
-  // Carrossel 3D de profissionais
-  (function () {
-    const wrap = document.getElementById('carousel3d')?.parentElement;
-    const ring = document.getElementById('carousel3d');
-    if (!wrap || !ring) return;
-
-    const items = Array.from(ring.querySelectorAll('.carousel-item'));
-    const count = items.length;
-    const angleStep = 360 / count;
-    const radius = Math.round(220 / (2 * Math.tan(Math.PI / count))); // baseado na largura do card
-
-    items.forEach((item, i) => {
-      item.style.transform = `rotateY(${i * angleStep}deg) translateZ(${radius}px)`;
-    });
-
-    let rotation = 0;
-    let baseSpeed = 0.03;   // graus por frame, giro lento padrão
-    let speed = baseSpeed;
-    let hovering = false;
-    let dragging = false;
-    let startX = 0;
-    let startRotation = 0;
-    let dragged = false;
-
-    function frame() {
-      if (!dragging) {
-        rotation += speed;
-        ring.style.transform = `rotateY(${rotation}deg)`;
-      }
-      requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-
-    wrap.addEventListener('mouseenter', () => { hovering = true; speed = baseSpeed * 10; });
-    wrap.addEventListener('mouseleave', () => { hovering = false; speed = baseSpeed; });
-
-    function pointerDown(x) {
-      dragging = true;
-      dragged = false;
-      startX = x;
-      startRotation = rotation;
-    }
-    function pointerMove(x) {
-      if (!dragging) return;
-      const delta = x - startX;
-      if (Math.abs(delta) > 4) dragged = true;
-      rotation = startRotation + delta * 0.5;
-      ring.style.transform = `rotateY(${rotation}deg)`;
-    }
-    function pointerUp() {
-      dragging = false;
-      speed = hovering ? baseSpeed * 10 : baseSpeed;
-    }
-
-    wrap.addEventListener('mousedown', (e) => pointerDown(e.clientX));
-    window.addEventListener('mousemove', (e) => pointerMove(e.clientX));
-    window.addEventListener('mouseup', pointerUp);
-
-    wrap.addEventListener('touchstart', (e) => pointerDown(e.touches[0].clientX), { passive: true });
-    wrap.addEventListener('touchmove', (e) => pointerMove(e.touches[0].clientX), { passive: true });
-    wrap.addEventListener('touchend', pointerUp);
-
-    items.forEach(item => {
-      item.addEventListener('click', () => {
-        if (dragged) return;
-        openTeamModal(item.dataset.team);
-      });
-    });
-  })();
+  // Grid estático de profissionais
+  document.querySelectorAll('.team-static-card').forEach(card => {
+    card.addEventListener('click', () => openTeamModal(card.dataset.team));
+  });
 
   // Pop-ups de serviços (Barbearia, Estética, SPA/Podologia, Clínica)
   const servicesData = {
