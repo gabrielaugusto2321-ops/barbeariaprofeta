@@ -398,10 +398,50 @@
           <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" autocomplete="off">
         </div>
         <div class="field-group">
-          <label for="phone">Celular</label>
-          <input type="tel" id="phone" placeholder="(44) 99999-9999" maxlength="15" autocomplete="tel">
+          <label for="rg">RG</label>
+          <input type="text" id="rg" placeholder="00.000.000-0" autocomplete="off">
         </div>
       </div>
+      <div class="field-group">
+        <label for="phone">Celular</label>
+        <input type="tel" id="phone" placeholder="(44) 99999-9999" maxlength="15" autocomplete="tel">
+      </div>
+
+      <div class="section-sep" style="margin-top:8px;">
+        <div class="section-sep-line"></div>
+        <span class="section-sep-label">Para o contrato</span>
+        <div class="section-sep-line"></div>
+      </div>
+
+      <div class="row-2">
+        <div class="field-group">
+          <label for="estado-civil">Estado civil</label>
+          <input type="text" id="estado-civil" placeholder="Ex: solteiro(a)" autocomplete="off">
+        </div>
+        <div class="field-group">
+          <label for="profissao">Profissão</label>
+          <input type="text" id="profissao" placeholder="Sua profissão" autocomplete="off">
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="endereco">Endereço (rua/avenida e número)</label>
+        <input type="text" id="endereco" placeholder="Av. Tiradentes, 1180" autocomplete="street-address">
+      </div>
+      <div class="row-2">
+        <div class="field-group">
+          <label for="cidade">Cidade</label>
+          <input type="text" id="cidade" placeholder="Maringá" autocomplete="address-level2">
+        </div>
+        <div class="field-group">
+          <label for="estado">Estado</label>
+          <input type="text" id="estado" placeholder="PR" maxlength="2" autocomplete="address-level1">
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="cep">CEP</label>
+        <input type="text" id="cep" placeholder="00000-000" maxlength="9" autocomplete="postal-code">
+      </div>
+
       <button class="btn-next" id="btn-step1" disabled>
         Continuar para pagamento →
       </button>
@@ -448,7 +488,7 @@
         <p class="term-heading"><strong>TERMO DE ACEITE</strong></p>
         <p class="term-heading"><strong>1. Objetivo</strong></p>
         <p>Os termos e condições deste documento Termo de Aceite têm por objetivo estabelecer as regras para regular o fornecimento de serviços de Barbearia, conteúdo e promoções, mediante assinatura, pela empresa A R CASTILHO LTDA.; inscrita no CNPJ sob o nº 66.538.904/0001-83 e ao ASSINANTE.</p>
-        <p>Contratada: <strong>A R CASTILHO LTDA</strong>, já qualificada anteriormente neste instrumento e ASSINANTE: ____________________________________________________________________________, brasileiro(a), ____________________________._________________________, inscrito no RG n.____________________________ e no CPF n_______________________________, residente e domiciliado à Av./Rua __________________________________________________, no município de _________________________, estado do _____________________________, CEP: ______________________________.</p>
+        <p>Contratada: <strong>A R CASTILHO LTDA</strong>, já qualificada anteriormente neste instrumento e ASSINANTE: <span class="fill" id="c-name">____________________</span>, brasileiro(a), <span class="fill" id="c-civil">____________</span>, <span class="fill" id="c-prof">____________</span>, inscrito no RG n.<span class="fill" id="c-rg">____________</span> e no CPF n<span class="fill" id="c-cpf">____________</span>, residente e domiciliado à Av./Rua <span class="fill" id="c-endereco">____________________</span>, no município de <span class="fill" id="c-cidade">____________</span>, estado do <span class="fill" id="c-estado">______</span>, CEP: <span class="fill" id="c-cep">____________</span>.</p>
         <p class="term-heading"><strong>2. Definições</strong></p>
         <p>Além das definições anteriormente citadas, sempre que em letras maiúsculas, os termos abaixo indicados terão o significado que a seguir lhes é apontado, seja no plural ou no singular:</p>
         <p>(1) Assinatura: contraprestação mensal, a cargo do ASSINANTE, pela fruição dos Serviços oferecidos pela A R CASTILHO LTDA.</p>
@@ -594,6 +634,8 @@ const maskExpiry=v=>{v=v.replace(/\D/g,'').slice(0,4);return v.length>=3?v.slice
 
 document.getElementById('cpf').addEventListener('input',e=>e.target.value=maskCPF(e.target.value));
 document.getElementById('phone').addEventListener('input',e=>e.target.value=maskPhone(e.target.value));
+document.getElementById('cep').addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,8).replace(/(\d{5})(\d)/,'$1-$2');});
+document.getElementById('estado').addEventListener('input',e=>e.target.value=e.target.value.toUpperCase().slice(0,2));
 document.getElementById('card-number').addEventListener('input',e=>{e.target.value=maskCard(e.target.value);detectBrand(e.target.value);});
 document.getElementById('card-expiry').addEventListener('input',e=>e.target.value=maskExpiry(e.target.value));
 document.getElementById('card-cvv').addEventListener('input',e=>e.target.value=e.target.value.replace(/\D/g,'').slice(0,4));
@@ -611,10 +653,29 @@ function valStep1(){
   const ok=document.getElementById('name').value.trim().length>=3
     &&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value.trim())
     &&document.getElementById('cpf').value.replace(/\D/g,'').length===11
-    &&document.getElementById('phone').value.replace(/\D/g,'').length>=10;
+    &&document.getElementById('rg').value.trim().length>=5
+    &&document.getElementById('phone').value.replace(/\D/g,'').length>=10
+    &&document.getElementById('estado-civil').value.trim().length>=3
+    &&document.getElementById('profissao').value.trim().length>=2
+    &&document.getElementById('endereco').value.trim().length>=5
+    &&document.getElementById('cidade').value.trim().length>=2
+    &&document.getElementById('estado').value.trim().length===2
+    &&document.getElementById('cep').value.replace(/\D/g,'').length===8;
   document.getElementById('btn-step1').disabled=!ok;
 }
-['name','email','cpf','phone'].forEach(id=>document.getElementById(id).addEventListener('input',valStep1));
+['name','email','cpf','rg','phone','estado-civil','profissao','endereco','cidade','estado','cep'].forEach(id=>document.getElementById(id).addEventListener('input',valStep1));
+
+function fillContract(){
+  document.getElementById('c-name').textContent=document.getElementById('name').value.trim()||'____________________';
+  document.getElementById('c-civil').textContent=document.getElementById('estado-civil').value.trim()||'____________';
+  document.getElementById('c-prof').textContent=document.getElementById('profissao').value.trim()||'____________';
+  document.getElementById('c-rg').textContent=document.getElementById('rg').value.trim()||'____________';
+  document.getElementById('c-cpf').textContent=document.getElementById('cpf').value.trim()||'____________';
+  document.getElementById('c-endereco').textContent=document.getElementById('endereco').value.trim()||'____________________';
+  document.getElementById('c-cidade').textContent=document.getElementById('cidade').value.trim()||'____________';
+  document.getElementById('c-estado').textContent=document.getElementById('estado').value.trim()||'______';
+  document.getElementById('c-cep').textContent=document.getElementById('cep').value.trim()||'____________';
+}
 
 function valStep2(){
   const ok=document.getElementById('card-name').value.trim().length>=3
@@ -630,6 +691,7 @@ function valStep2(){
 });
 
 document.getElementById('btn-step1').addEventListener('click',()=>{
+  fillContract();
   document.getElementById('step1-label').className='step done';
   document.getElementById('step1-num').textContent='✓';
   document.getElementById('step2-label').className='step active';
