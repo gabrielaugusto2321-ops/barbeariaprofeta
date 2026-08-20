@@ -789,7 +789,7 @@ document.getElementById('btn-step2').addEventListener('click',async()=>{
       }catch(saveErr){
         console.error('Falha ao gravar contrato no Supabase (pagamento já confirmado):',saveErr);
       }
-      window.location.href='confirmacao.html';
+      window.location.href='confirmacao.html?plano='+encodeURIComponent(planoAtual);
     }else{
       throw new Error(data.error||data.message||'Erro ao processar o pagamento.');
     }
