@@ -204,16 +204,20 @@
   .prod-strip .cell img{width:100%;height:100%;object-fit:cover;filter:grayscale(.4) brightness(.75);transition:filter .5s ease,transform .7s ease;}
   .prod-strip .cell:hover img{filter:grayscale(0) brightness(1);transform:scale(1.06);}
 
-  /* ---------- Vídeo estacionamento/valet (estilo hero, horizontal full-width) ---------- */
+  /* ---------- Vídeos estacionamento/valet (3 verticais lado a lado) ---------- */
   .valet-video-wrap{
-    position:relative;width:100%;height:520px;overflow:hidden;background:#000;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+    width:100%;background:#000;
+  }
+  .valet-video-cell{
+    position:relative;aspect-ratio:9/16;overflow:hidden;background:#000;
   }
   .valet-video{
     width:100%;height:100%;object-fit:cover;object-position:center;
-    filter:brightness(.7) saturate(1);
+    filter:brightness(.85) saturate(1);
   }
   @media (max-width:768px){
-    .valet-video-wrap{height:320px;}
+    .valet-video-wrap{gap:1px;}
   }
 
   /* ---------- Blog ---------- */
@@ -826,9 +830,21 @@
     </div>
   </div>
   <div class="valet-video-wrap reveal">
-    <video autoplay muted loop playsinline class="valet-video">
-      <source src="estacionamento-valet.mp4" type="video/mp4">
-    </video>
+    <div class="valet-video-cell">
+      <video autoplay muted loop playsinline class="valet-video">
+        <source src="valet-1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="valet-video-cell">
+      <video autoplay muted loop playsinline class="valet-video">
+        <source src="valet-2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="valet-video-cell">
+      <video autoplay muted loop playsinline class="valet-video">
+        <source src="valet-3.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
 </section>
 
