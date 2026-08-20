@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profeta Exclusive — Quero ser convidado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0b;
+    --bg-soft:#141414;
+    --gold:#c9a876;
+    --gold-dim:rgba(201,168,118,.35);
+    --marsala:#7c2f3a;
+    --text:#f4f2ec;
+    --text-dim:rgba(244,242,236,.62);
+    --line:rgba(244,242,236,.14);
+    --error:#cc4444;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    letter-spacing:.02em;
+  }
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  a{color:inherit;text-decoration:none;}
+
+  /* ── Header ── */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:20px 6vw;
+    display:flex;align-items:center;justify-content:space-between;
+    background:rgba(11,11,11,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.3rem;letter-spacing:.32em;
+  }
+  .logo span{
+    display:block;font-family:'Jost',sans-serif;
+    font-size:.45rem;letter-spacing:.22em;
+    color:var(--gold);font-weight:400;margin-top:2px;
+  }
+  .back-link{
+    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--text-dim);
+    display:flex;align-items:center;gap:6px;
+    transition:color .25s;
+  }
+  .back-link:hover{color:var(--text);}
+  .back-link svg{width:14px;height:14px;}
+
+  /* ── Wrapper ── */
+  .page-wrap{
+    padding-top:110px;
+    padding-bottom:80px;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+  }
+  .form-box{
+    width:100%;
+    max-width:560px;
+    padding:0 24px;
+  }
+  .form-eyebrow{margin-bottom:10px;display:block;}
+  .form-title{
+    font-size:clamp(1.8rem,3vw,2.4rem);
+    text-transform:uppercase;line-height:1.15;
+    margin-bottom:8px;
+  }
+  .form-title em{color:var(--gold);font-style:italic;}
+  .form-subtitle{
+    font-size:.88rem;color:var(--text-dim);
+    line-height:1.6;margin-bottom:36px;
+  }
+
+  /* ── Campos ── */
+  .field-group{
+    display:flex;flex-direction:column;gap:6px;
+    margin-bottom:18px;
+  }
+  label{
+    font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--text-dim);
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea{
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--line);
+    color:var(--text);
+    font-size:.95rem;
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    padding:14px 16px;
+    outline:none;
+    width:100%;
+    transition:border-color .2s,background .2s;
+    border-radius:0;
+    -webkit-appearance:none;
+  }
+  select{
+    appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9a876' stroke-width='1.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 14px center;
+    background-size:16px;
+    cursor:pointer;
+  }
+  select option{background:#141414;color:var(--text);}
+  textarea{resize:vertical;min-height:90px;font-family:'Jost',sans-serif;line-height:1.5;}
+  input:focus,select:focus,textarea:focus{
+    border-color:var(--gold);
+    background:rgba(201,168,118,.04);
+  }
+  input::placeholder,textarea::placeholder{color:rgba(244,242,236,.2);}
+
+  .row-2{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  }
+
+  /* ── Checkbox de interesses (múltipla escolha) ── */
+  .check-grid{
+    display:flex;flex-direction:column;gap:10px;
+    margin-bottom:18px;
+  }
+  .check-row{
+    display:flex;align-items:flex-start;gap:12px;
+    cursor:pointer;
+    border:1px solid var(--line);
+    padding:12px 14px;
+    transition:border-color .2s,background .2s;
+  }
+  .check-row:hover{border-color:var(--gold-dim);}
+  .check-row input[type="checkbox"]{
+    width:16px;height:16px;min-width:16px;
+    border:1px solid var(--line);
+    background:transparent;
+    appearance:none;-webkit-appearance:none;
+    cursor:pointer;position:relative;
+    margin-top:2px;
+    transition:border-color .2s,background .2s;
+  }
+  .check-row input[type="checkbox"]:checked{
+    background:var(--gold);border-color:var(--gold);
+  }
+  .check-row input[type="checkbox"]:checked::after{
+    content:'✓';
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    color:#0b0b0b;font-size:.65rem;font-weight:700;
+  }
+  .check-label{
+    font-size:.84rem;color:var(--text);line-height:1.4;
+  }
+
+  /* ── Separador ── */
+  .section-sep{
+    display:flex;align-items:center;gap:12px;
+    margin:28px 0 24px;
+  }
+  .section-sep-line{flex:1;height:1px;background:var(--line);}
+  .section-sep-label{
+    font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);white-space:nowrap;
+  }
+
+  /* ── Mensagem ── */
+  .msg{
+    padding:13px 16px;
+    font-size:.85rem;
+    margin-top:16px;
+    display:none;
+    border-left:2px solid;
+  }
+  .msg.error{
+    background:rgba(204,68,68,.08);
+    border-color:var(--error);
+    color:#e08080;
+    display:block;
+  }
+  .msg.success{
+    background:rgba(201,168,118,.08);
+    border-color:var(--gold);
+    color:var(--gold);
+    display:block;
+  }
+
+  /* ── Botão ── */
+  .btn-submit{
+    width:100%;
+    background:var(--gold);
+    color:#0b0b0b;
+    border:1px solid var(--gold);
+    font-family:'Jost',sans-serif;
+    font-size:.72rem;
+    font-weight:500;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    padding:17px;
+    cursor:pointer;
+    margin-top:24px;
+    transition:background .3s,color .3s;
+    border-radius:0;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .btn-submit:hover:not(:disabled){background:transparent;color:var(--gold);}
+  .btn-submit:disabled{opacity:.4;cursor:not-allowed;}
+
+  .spinner{
+    width:13px;height:13px;
+    border:2px solid rgba(11,11,11,.25);
+    border-top-color:#0b0b0b;
+    border-radius:50%;
+    animation:spin .7s linear infinite;
+    display:none;
+    flex-shrink:0;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ── Confirmação (some o form, mostra isso) ── */
+  .confirm-box{display:none;text-align:center;padding:40px 0;}
+  .confirm-box .icon{
+    width:56px;height:56px;border-radius:50%;
+    border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 22px;
+  }
+  .confirm-box .icon svg{width:24px;height:24px;stroke:var(--gold);}
+  .confirm-box h3{font-size:1.5rem;text-transform:uppercase;margin-bottom:12px;}
+  .confirm-box h3 em{color:var(--gold);font-style:italic;}
+  .confirm-box p{color:var(--text-dim);font-size:.9rem;line-height:1.7;max-width:400px;margin:0 auto 26px;}
+  .confirm-box .btn-wa{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--gold);color:var(--gold);
+    padding:14px 28px;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+    transition:background .25s,color .25s;
+  }
+  .confirm-box .btn-wa:hover{background:var(--gold);color:#0b0b0b;}
+
+  /* ── Footer ── */
+  .footer-bar{
+    border-top:1px solid var(--line);
+    padding:20px 6vw;
+    text-align:center;
+    font-size:.66rem;
+    color:rgba(244,242,236,.2);
+    letter-spacing:.06em;
+  }
+  .footer-bar a{color:var(--gold);opacity:.6;}
+  .footer-bar .credit-dot{
+    width:5px;height:5px;border-radius:50%;
+    background:#5b84c4;display:inline-block;vertical-align:middle;
+    margin:0 4px;
+  }
+  .footer-bar .credit-brand{color:#7fa3d6;}
+
+  /* ── Responsive ── */
+  @media(max-width:480px){
+    .row-2{grid-template-columns:1fr;}
+    .form-box{padding:0 16px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="profeta-experience.html" class="back-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Voltar
+  </a>
+  <a href="index.html" class="logo">
+    PROFETA
+    <span>Centro Estético para Homem</span>
+  </a>
+  <div style="width:80px;"></div>
+</header>
+
+<div class="page-wrap">
+  <div class="form-box">
+
+    <div id="form-state">
+      <span class="eyebrow form-eyebrow">Profeta Exclusive · Somente convite</span>
+      <h2 class="form-title">Quero ser <em>convidado</em></h2>
+      <p class="form-subtitle">O Exclusive não tem inscrição aberta — conta um pouco sobre você e a nossa equipe entra em contato pelo WhatsApp pra conversar sobre o convite.</p>
+
+      <div class="field-group">
+        <label for="name">Nome completo</label>
+        <input type="text" id="name" placeholder="Seu nome completo" autocomplete="name">
+      </div>
+      <div class="row-2">
+        <div class="field-group">
+          <label for="phone">WhatsApp</label>
+          <input type="tel" id="phone" placeholder="(44) 99999-9999" maxlength="15" autocomplete="tel">
+        </div>
+        <div class="field-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seu@email.com" autocomplete="email">
+        </div>
+      </div>
+
+      <div class="section-sep">
+        <div class="section-sep-line"></div>
+        <span class="section-sep-label">Sobre você</span>
+        <div class="section-sep-line"></div>
+      </div>
+
+      <div class="field-group">
+        <label for="cliente-atual">Já é cliente da Profeta?</label>
+        <select id="cliente-atual">
+          <option value="">Selecione</option>
+          <option value="Não sou cliente ainda">Não, ainda não sou cliente</option>
+          <option value="Sim, plano Basic">Sim, sou do plano Basic</option>
+          <option value="Sim, plano Black">Sim, sou do plano Black</option>
+          <option value="Sim, cliente avulso">Sim, cliente avulso (sem plano)</option>
+        </select>
+      </div>
+
+      <div class="row-2">
+        <div class="field-group">
+          <label for="frequencia">Frequência que costuma vir</label>
+          <select id="frequencia">
+            <option value="">Selecione</option>
+            <option value="Semanal">Semanal</option>
+            <option value="Quinzenal">Quinzenal</option>
+            <option value="Mensal">Mensal</option>
+            <option value="Esporádica">Esporádica</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="melhor-horario">Melhor horário pra contato</label>
+          <select id="melhor-horario">
+            <option value="">Selecione</option>
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-sep">
+        <div class="section-sep-line"></div>
+        <span class="section-sep-label">O que te interessa no Exclusive</span>
+        <div class="section-sep-line"></div>
+      </div>
+
+      <div class="check-grid" id="interesses-grid">
+        <label class="check-row">
+          <input type="checkbox" value="Visagismo liberado">
+          <span class="check-label">Visagismo liberado</span>
+        </label>
+        <label class="check-row">
+          <input type="checkbox" value="Todos os extras 4x por mês">
+          <span class="check-label">Todos os extras, 4x por mês</span>
+        </label>
+        <label class="check-row">
+          <input type="checkbox" value="Massagens e manicures inclusas">
+          <span class="check-label">2 massagens + 2 manicures por mês</span>
+        </label>
+        <label class="check-row">
+          <input type="checkbox" value="Horário fixo com prioridade">
+          <span class="check-label">Horário fixo com prioridade máxima</span>
+        </label>
+        <label class="check-row">
+          <input type="checkbox" value="Manobrista exclusivo">
+          <span class="check-label">Manobrista exclusivo</span>
+        </label>
+      </div>
+
+      <div class="field-group">
+        <label for="observacoes">Quer contar mais alguma coisa? (opcional)</label>
+        <textarea id="observacoes" placeholder="Indicação, expectativas, algo que queira adiantar pra gente..."></textarea>
+      </div>
+
+      <div class="msg" id="msg"></div>
+
+      <button class="btn-submit" id="btn-submit" disabled>
+        <span class="spinner" id="spinner"></span>
+        <span id="btn-text">Enviar interesse</span>
+      </button>
+    </div>
+
+    <!-- Estado de confirmação -->
+    <div class="confirm-box" id="confirm-state">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h3>Recebemos seu <em>interesse</em></h3>
+      <p>Abrimos o WhatsApp com sua mensagem pronta pra enviar. Assim que você mandar, nossa equipe te chama pra conversar sobre o convite Exclusive.</p>
+      <a href="#" id="btn-wa-again" class="btn-wa" target="_blank" rel="noopener">
+        Abrir WhatsApp novamente
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer-bar">
+  Desenvolvido por <a href="#">Paes Technology</a>
+  <span class="credit-dot"></span>
+  <span class="credit-brand">Barbearia Profeta</span> © 2026
+</div>
+
+<script>
+const WHATSAPP_NUMBER = '554430472098';
+
+function maskPhone(v){
+  v=v.replace(/\D/g,'').slice(0,11);
+  if(v.length>10) return v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3');
+  return v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3').replace(/-$/,'');
+}
+document.getElementById('phone').addEventListener('input',e=>e.target.value=maskPhone(e.target.value));
+
+function valForm(){
+  const ok=document.getElementById('name').value.trim().length>=3
+    &&document.getElementById('phone').value.replace(/\D/g,'').length>=10
+    &&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value.trim())
+    &&document.getElementById('cliente-atual').value!==''
+    &&document.getElementById('frequencia').value!==''
+    &&document.getElementById('melhor-horario').value!=='';
+  document.getElementById('btn-submit').disabled=!ok;
+}
+['name','phone','email','cliente-atual','frequencia','melhor-horario'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',valForm);
+  document.getElementById(id).addEventListener('change',valForm);
+});
+
+function buildWhatsappMessage(){
+  const name=document.getElementById('name').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const clienteAtual=document.getElementById('cliente-atual').value;
+  const frequencia=document.getElementById('frequencia').value;
+  const melhorHorario=document.getElementById('melhor-horario').value;
+  const observacoes=document.getElementById('observacoes').value.trim();
+  const interesses=Array.from(document.querySelectorAll('#interesses-grid input:checked')).map(i=>i.value);
+
+  let msg=`Olá! Quero saber mais sobre o convite pro *Profeta Exclusive*.\n\n`;
+  msg+=`*Nome:* ${name}\n`;
+  msg+=`*E-mail:* ${email}\n`;
+  msg+=`*Já é cliente Profeta:* ${clienteAtual}\n`;
+  msg+=`*Frequência que costuma vir:* ${frequencia}\n`;
+  msg+=`*Melhor horário pra contato:* ${melhorHorario}\n`;
+  if(interesses.length){
+    msg+=`*O que mais me interessa:* ${interesses.join(', ')}\n`;
+  }
+  if(observacoes){
+    msg+=`*Observações:* ${observacoes}\n`;
+  }
+  return msg;
+}
+
+let waLink='';
+
+document.getElementById('btn-submit').addEventListener('click',()=>{
+  const btn=document.getElementById('btn-submit');
+  const spinner=document.getElementById('spinner');
+  const btnText=document.getElementById('btn-text');
+
+  btn.disabled=true;
+  spinner.style.display='block';
+  btnText.textContent='Preparando...';
+
+  const message=buildWhatsappMessage();
+  waLink=`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+  setTimeout(()=>{
+    document.getElementById('btn-wa-again').href=waLink;
+    document.getElementById('form-state').style.display='none';
+    document.getElementById('confirm-state').style.display='block';
+    window.open(waLink,'_blank');
+    window.scrollTo({top:0,behavior:'smooth'});
+  },500);
+});
+</script>
+
+</body>
+</html>
