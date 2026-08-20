@@ -14,11 +14,19 @@ const ASAAS_BASE_URL = {
   production: "https://api.asaas.com/v3",
 };
 
-const PLANO = {
-  value: 289.0,
-  cycle: "MONTHLY",
-  description: "Profeta Experience - Assinatura mensal",
+// Mapa de planos -> preço. O preço NUNCA vem do front-end (evita manipulação);
+// o front manda só o código do plano, e a gente resolve o valor real aqui.
+const PLANOS = {
+  "basic-corte":  { value: 169.90, description: "Profeta Experience - Basic (Corte)" },
+  "basic-barba":  { value: 179.90, description: "Profeta Experience - Basic (Barba)" },
+  "basic-combo":  { value: 289.90, description: "Profeta Experience - Basic (Corte + Barba)" },
+  "black-corte":  { value: 189.90, description: "Profeta Experience - Black (Corte)" },
+  "black-barba":  { value: 219.90, description: "Profeta Experience - Black (Barba)" },
+  "black-combo":  { value: 339.90, description: "Profeta Experience - Black (Corte + Barba)" },
+  // Fallback: mantém o valor histórico pra quem entrar pelo CTA final sem plano definido.
+  "legacy-289":   { value: 289.90, description: "Profeta Experience - Assinatura mensal" },
 };
+const CYCLE = "MONTHLY";
 
 function jsonResponse(statusCode, body) {
   return {
@@ -103,6 +111,7 @@ exports.handler = async (event) => {
     cardExpiryMonth,
     cardExpiryYear,
     cardCvv,
+    plano,
   } = payload;
 
   // Validação básica dos campos obrigatórios
@@ -117,6 +126,9 @@ exports.handler = async (event) => {
       missing,
     });
   }
+
+  // Resolve o plano e o preço real no servidor (nunca confia no valor vindo do front).
+  const planoInfo = PLANOS[plano] || PLANOS["legacy-289"];
 
   const cpfDigits = onlyDigits(cpf);
   const phoneDigits = onlyDigits(phone);
@@ -167,9 +179,9 @@ exports.handler = async (event) => {
         body: JSON.stringify({
           customer: customerId,
           billingType: "CREDIT_CARD",
-          value: PLANO.value,
-          cycle: PLANO.cycle,
-          description: PLANO.description,
+          value: planoInfo.value,
+          cycle: CYCLE,
+          description: planoInfo.description,
           nextDueDate: new Date().toISOString().split("T")[0],
           creditCard: {
             holderName: cardName,
@@ -200,6 +212,8 @@ exports.handler = async (event) => {
       customerId,
       subscriptionId: subscription.id,
       status: subscription.status,
+      value: planoInfo.value,
+      plano: plano || "legacy-289",
     });
   } catch (err) {
     console.error("Erro ao processar assinatura Asaas:", err.message, err.raw);
