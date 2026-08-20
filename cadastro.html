@@ -365,9 +365,9 @@
 <div class="page-wrap">
   <div class="form-box">
 
-    <span class="eyebrow form-eyebrow">Profeta Experience</span>
+    <span class="eyebrow form-eyebrow" id="plan-eyebrow">Profeta Experience</span>
     <h2 class="form-title">Quero ser <em>membro</em></h2>
-    <p class="form-subtitle">Preencha seus dados e finalize sua assinatura em menos de 2 minutos.</p>
+    <p class="form-subtitle" id="plan-subtitle">Preencha seus dados e finalize sua assinatura em menos de 2 minutos.</p>
 
     <!-- Steps -->
     <div class="steps">
@@ -608,7 +608,7 @@
 
       <button class="btn-submit" id="btn-step2" disabled>
         <span class="spinner" id="spinner"></span>
-        <span id="btn-text">Confirmar assinatura · R$289/mês</span>
+        <span id="btn-text">Confirmar assinatura</span>
       </button>
 
       <div class="secure-note">
@@ -627,6 +627,26 @@
 </div>
 
 <script>
+// Mesmo mapa de preços que existe no servidor (netlify/functions/asaas-subscribe.js).
+// Aqui é só pra exibir o valor certo pro cliente antes de enviar — quem decide
+// o valor cobrado de verdade é sempre o back-end, nunca o front.
+const PLANOS_DISPLAY={
+  'basic-corte': {label:'Basic · Corte', value:'169,90'},
+  'basic-barba': {label:'Basic · Barba', value:'179,90'},
+  'basic-combo': {label:'Basic · Corte + Barba', value:'289,90'},
+  'black-corte': {label:'Black · Corte', value:'189,90'},
+  'black-barba': {label:'Black · Barba', value:'219,90'},
+  'black-combo': {label:'Black · Corte + Barba', value:'339,90'},
+  'legacy-289':  {label:'Profeta Experience', value:'289,90'},
+};
+const planoParam=new URLSearchParams(window.location.search).get('plano')||'legacy-289';
+const planoAtual=PLANOS_DISPLAY[planoParam]?planoParam:'legacy-289';
+const planoInfo=PLANOS_DISPLAY[planoAtual];
+
+document.getElementById('plan-eyebrow').textContent='Profeta Experience · '+planoInfo.label;
+document.getElementById('plan-subtitle').textContent='Preencha seus dados e finalize sua assinatura de R$'+planoInfo.value+'/mês em menos de 2 minutos.';
+document.getElementById('btn-text').textContent='Confirmar assinatura · R$'+planoInfo.value+'/mês';
+
 const maskCPF=v=>{v=v.replace(/\D/g,'').slice(0,11);return v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');};
 const maskPhone=v=>{v=v.replace(/\D/g,'').slice(0,11);return v.length>10?v.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3'):v.replace(/(\d{2})(\d{4})(\d{0,4})/,'($1) $2-$3');};
 const maskCard=v=>v.replace(/\D/g,'').slice(0,16).replace(/(.{4})/g,'$1 ').trim();
@@ -711,6 +731,10 @@ document.getElementById('btn-step2').addEventListener('click',async()=>{
   spinner.style.display='block';
   btnText.textContent='Processando...';
 
+  // Extrai o número do endereço (heurística: último grupo de dígitos do campo).
+  const enderecoVal=document.getElementById('endereco').value.trim();
+  const numeroMatch=enderecoVal.match(/(\d+)(?!.*\d)/);
+
   const payload={
     name:document.getElementById('name').value.trim(),
     email:document.getElementById('email').value.trim(),
@@ -721,6 +745,9 @@ document.getElementById('btn-step2').addEventListener('click',async()=>{
     cardExpiryMonth:document.getElementById('card-expiry').value.split('/')[0],
     cardExpiryYear:'20'+document.getElementById('card-expiry').value.split('/')[1],
     cardCvv:document.getElementById('card-cvv').value,
+    plano:planoAtual,
+    postalCode:document.getElementById('cep').value.replace(/\D/g,''),
+    addressNumber:numeroMatch?numeroMatch[1]:'0',
   };
 
   try{
@@ -735,10 +762,9 @@ document.getElementById('btn-step2').addEventListener('click',async()=>{
       // e a autorização de imagem no Supabase. Isso não bloqueia o redirect
       // mesmo se falhar, porque o pagamento já foi concluído.
       try{
-        const planoParam=new URLSearchParams(window.location.search).get('plano')||'legacy-289';
         const imageAuthEl=document.querySelector('input[name="image-auth"]:checked');
         const contractPayload={
-          plano:planoParam,
+          plano:planoAtual,
           name:payload.name,
           email:payload.email,
           cpf:payload.cpf,
@@ -771,7 +797,7 @@ document.getElementById('btn-step2').addEventListener('click',async()=>{
     msg.className='msg error';
     msg.textContent=err.message||'Erro ao processar. Verifique os dados e tente novamente.';
     spinner.style.display='none';
-    btnText.textContent='Confirmar assinatura · R$289/mês';
+    btnText.textContent='Confirmar assinatura · R$'+planoInfo.value+'/mês';
     btn.disabled=false;
     valStep2();
   }
