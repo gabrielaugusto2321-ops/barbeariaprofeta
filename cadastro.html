@@ -221,6 +221,34 @@
   .checkbox-label{
     font-size:.82rem;color:var(--text-dim);line-height:1.5;
   }
+  .term-heading{
+    color:var(--gold);font-weight:600;margin-top:12px;
+  }
+  .terms-scroll p:first-child.term-heading{margin-top:0;}
+  .radio-row{
+    display:flex;align-items:flex-start;gap:12px;
+    cursor:pointer;margin-bottom:10px;
+  }
+  .radio-row input[type="radio"]{
+    width:16px;height:16px;min-width:16px;
+    border:1px solid var(--line);border-radius:50%;
+    background:transparent;
+    appearance:none;-webkit-appearance:none;
+    cursor:pointer;position:relative;
+    margin-top:3px;
+    transition:border-color .2s,background .2s;
+  }
+  .radio-row input[type="radio"]:checked{
+    border-color:var(--marsala);
+  }
+  .radio-row input[type="radio"]:checked::after{
+    content:'';
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:8px;height:8px;border-radius:50%;
+    background:var(--marsala);
+  }
+  .image-auth-row{margin-bottom:6px;}
 
   /* ── Mensagem ── */
   .msg{
@@ -412,25 +440,129 @@
 
       <div class="section-sep">
         <div class="section-sep-line"></div>
-        <span class="section-sep-label">Termos de uso</span>
+        <span class="section-sep-label">Contrato de adesão</span>
         <div class="section-sep-line"></div>
       </div>
 
       <div class="terms-scroll">
-        <h4>Termos de Uso — Profeta Experience</h4>
-        <p>Ao assinar o plano Profeta Experience, o cliente concorda com os seguintes termos e condições:</p>
-        <p><strong>1. Assinatura e Cobrança:</strong> A assinatura é mensal e renovada automaticamente no cartão de crédito cadastrado. O valor de R$289,00 será debitado mensalmente na data de adesão.</p>
-        <p><strong>2. Benefícios:</strong> Os benefícios são válidos exclusivamente durante a vigência da assinatura ativa. Um atendimento completo (corte + barba) por mês, desconto de 15% em serviços avulsos e prioridade de agendamento estão inclusos.</p>
-        <p><strong>3. Agendamento:</strong> O agendamento VIP deve ser feito com antecedência mínima de 24 horas. A Barbearia Profeta reserva-se ao direito de reagendar atendimentos em casos de força maior, com aviso prévio.</p>
-        <p><strong>4. Cancelamento:</strong> O cancelamento pode ser solicitado via WhatsApp ou presencialmente, sem taxa ou multa. O acesso é mantido até o fim do período vigente já pago.</p>
-        <p><strong>5. Dados Pessoais:</strong> As informações fornecidas são utilizadas exclusivamente para cadastro, cobrança e comunicação referente ao plano. Não compartilhamos dados com terceiros.</p>
-        <p><strong>6. Foro:</strong> Fica eleito o foro da comarca de Maringá-PR para dirimir eventuais controvérsias.</p>
+        <p class="term-heading"><strong>TERMO DE ACEITE</strong></p>
+        <p class="term-heading"><strong>1. Objetivo</strong></p>
+        <p>Os termos e condições deste documento Termo de Aceite têm por objetivo estabelecer as regras para regular o fornecimento de serviços de Barbearia, conteúdo e promoções, mediante assinatura, pela empresa A R CASTILHO LTDA.; inscrita no CNPJ sob o nº 66.538.904/0001-83 e ao ASSINANTE.</p>
+        <p>Contratada: <strong>A R CASTILHO LTDA</strong>, já qualificada anteriormente neste instrumento e ASSINANTE: ____________________________________________________________________________, brasileiro(a), ____________________________._________________________, inscrito no RG n.____________________________ e no CPF n_______________________________, residente e domiciliado à Av./Rua __________________________________________________, no município de _________________________, estado do _____________________________, CEP: ______________________________.</p>
+        <p class="term-heading"><strong>2. Definições</strong></p>
+        <p>Além das definições anteriormente citadas, sempre que em letras maiúsculas, os termos abaixo indicados terão o significado que a seguir lhes é apontado, seja no plural ou no singular:</p>
+        <p>(1) Assinatura: contraprestação mensal, a cargo do ASSINANTE, pela fruição dos Serviços oferecidos pela A R CASTILHO LTDA.</p>
+        <p>(2) Produtos: pomadas, óleos, sprays, cremes e afins fornecidos pelos Fornecedores, selecionados a critério exclusivo da A R CASTILHO LTDA e encaminhados para o ASSINANTE, dentro dos Kits (quando houver kit).</p>
+        <p>(3) Cupons de Desconto: cupons emitidos pelos Parceiros, destinados à aquisição de produtos ou serviços sob condições promocionais, segundo os termos e condições especificados pelos Fornecedores nos respectivos cupons.</p>
+        <p>(4) Parceiros: conceituadas empresas responsáveis pela fabricação e/ou importação dos Brindes ou prestação de serviços congêneres.</p>
+        <p>(5) Materiais Promocionais: catálogos, folders, mostruários ou qualquer outro material promocional disponibilizado pelos Fornecedores destinados à divulgação de seus produtos ou serviços.</p>
+        <p>(6) Serviços: serviços periódicos de conteúdo, consultoria e promoções relacionadas ao ramo de barbearia e oferecidos pela A R CASTILHO LTDA ao ASSINANTE por meio de seu Website</p>
+        <p class="term-heading"><strong>3. Adesão</strong></p>
+        <p>Ao receber o link de assinatura, o ASSINANTE deverá escolher o plano de sua preferência e realizar o pagamento via cartão de crédito pela plataforma do sistema de cobrança Asaas. Ao realizar o pagamento o ASSINANTE declara aceitar os termos e condições aqui previstos e manifestar sua concordância com a Política de Privacidade da A R CASTILHO LTDA, incorporada ao presente Termo de Aceite.</p>
+        <p>Concluídos os passos acima indicados, este Termo de Aceite considerar-se-á celebrado e obrigatório entre as Partes, sendo certo que, assim procedendo, o ASSINANTE declara ter lido e compreendido todos os termos e condições deste documento, razão pela qual é recomendável que ASSINANTE imprima uma cópia deste Termo de Aceite para futura referência.</p>
+        <p>A empresa A R CASTILHO LTDA, a seu exclusivo critério e a qualquer tempo, poderá revisar e alterar este Termo de Aceite e o documento mencionado acima.</p>
+        <p>A empresa A R CASTILHO LTDA, sempre que possível, mas não obrigatoriamente, informará o ASSINANTE sobre mudanças nos termos e condições aqui previstos e em sua Política de Privacidade.</p>
+        <p>Como esta informação é discricionária, o ASSINANTE deverá consultar e reler tais documentos periodicamente e cumprir tais revisões ou alterações. As versões mais atualizadas estarão disponíveis nos websites mencionados acima e, ao acessar o Website poderá ser requerido que o ASSINANTE aceite novamente e eletronicamente os novos termos e condições.</p>
+        <p>As alterações a este Termo de Aceite que importem em ônus financeiro ao ASSINANTE serão feitas mediante comunicação prévia ao mesmo conforme cláusula 4</p>
+        <p class="term-heading"><strong>4. Preço, Forma e Condições de Pagamento</strong></p>
+        <p>O preço da Assinatura e condições de pagamento pelos Serviços são àqueles aceitos pelo ASSINANTE no momento da adesão, que farão parte integrante deste Termo de Aceite.</p>
+        <p>Os pagamentos das Assinaturas, durante a vigência do Termo de Aceite, serão realizados mensalmente pelo ASSINANTE, sendo o primeiro pagamento devido na data da adesão e os demais no mesmo dia dos meses subsequentes, sempre por meio de cartão de crédito. A contratada A R CASTILHO LTDA não aceitará, em hipótese alguma, outro meio de pagamento.</p>
+        <p>O valor das Assinaturas e dos Serviços poderá ser readequado podendo sofrer acréscimo ou decréscimo no valor contratado, <u>trimestralmente</u>, mediante comunicação prévia ao ASSINANTE por e-mail, com indicação do novo valor e com pelo menos 30 (trinta) dias de antecedência. Dentro desse prazo, poderá o ASSINANTE optar pelo cancelamento da Assinatura, sem incorrer em qualquer ônus. Findo o prazo sem que haja o cancelamento dos serviços pelo ASSINANTE, o novo valor será considerado aceito e passará a ser cobrado nas faturas seguintes.</p>
+        <p class="term-heading"><strong>5. Compras Únicas</strong></p>
+        <p>A empresa A R CASTILHO LTDA disponibiliza como facilidade de pagamento a possibilidade de lançamentos de cobrança no cartão de crédito cadastrado na aquisição da assinatura mensal. Sendo necessário autorização do cliente para a realização de tais cobranças, como por exemplo: Consumo de bebidas, produtos cosméticos ou serviços à parte.</p>
+        <p>O ASSINANTE receberá um e-mail de confirmação com o valor e descrição dos itens cobrados a parte.</p>
+        <p>O ASSINANTE autoriza a cobrança esporádica com autorização previa verbal e confirmação da mesma para conferência via e-mail.</p>
+        <p>O envio do e-mail de conferência inibe o ASSINANTE de reclamações posteriores caso venha alegar desconhecimento da cobrança. Se houver por parte do ASSINANTE algum desconhecimento da cobrança deverá ser feito a reclamação no dia para análise do caso.</p>
+        <p class="term-heading"><strong>6. Obrigações da A R CASTILHO LTDA</strong></p>
+        <p>São obrigações da <strong>A R CASTILHO LTDA:</strong></p>
+        <p>(1) Prestar os Serviços em estrita observância a este Termo de Aceite e em conformidade com a legislação aplicável;</p>
+        <p>(2) Prestar informações claras, completas e precisas sobre os Serviços disponibilizados ao ASSINANTE;</p>
+        <p>(3) Envidar os melhores esforços para garantir a acessibilidade e funcionalidade do Website e App de Agendamento;</p>
+        <p>(4) Preservar a confidencialidade dos dados pessoais fornecidos pelo ASSINANTE, em conformidade com a Política de Privacidade disponível no Website; e</p>
+        <p>(5) Disponibilizar canais de atendimento ao ASSINANTE.</p>
+        <p class="term-heading"><strong>7. Obrigações do ASSINANTE</strong></p>
+        <p>São obrigações do ASSINANTE:</p>
+        <p>(1) Fornecer informações verdadeiras, completas e precisas no momento da adesão e mantê-las atualizadas por todo o período contratual, informando à A R CASTILHO LTDA a eventual mudança de endereço para cobrança até o quinto dia do mês;</p>
+        <p>(2) Efetuar o pagamento da Assinatura na data de seu vencimento sendo que, caso não o faça, a A R CASTILHO LTDA se reserva o direito de suspender imediatamente a prestação dos Serviços até que o pagamento seja restabelecido;</p>
+        <p class="term-heading"><strong>8. Atendimento ao ASSINANTE</strong></p>
+        <p>O ASSINANTE deverá encaminhar suas dúvidas, solicitações e reclamações ao Serviço de Atendimento ao Consumidor (SAC) da A R CASTILHO LTDA, cujo horário de funcionamento se dará de terça a sexta, das 10h00 às 18h00 (ALTERAR O HORARIO), pelos seguintes canais:</p>
+        <p>Por e-mail: CALEB COLOCA SEU EMAIL</p>
+        <p>Por telefone: (44) 98844-7283;</p>
+        <p>Por celular/whatsapp (44) 98844-7283;</p>
+        <p class="term-heading"><strong>9. Limitações dos Serviços</strong></p>
+        <p>O ASSINANTE se declara ciente de que poderá agendar com antecedência máxima de sete dias a realização de seus serviços, sob pena de não encontrar disponibilidade na agenda caso o horário desejado já esteja reservado para outra pessoa.</p>
+        <p>É vedado ao ASSINANTE ceder, emprestar, doar, presentear os serviços hora assinados em seu nome para terceiros, o que ensejará a suspensão e/ou rescisão imediata do presente Termo de Aceite, a critério exclusivo da <strong>A R CASTILHO LTDA</strong>.</p>
+        <p class="term-heading"><strong>A EMPRESA A R CASTILHO LTDA NÃO SE RESPONSABILIZARÁ</strong></p>
+        <p>(1) Por defeitos de projeto, fabricação ou de informação dos Produtos, ou pelos prejuízos deles decorrentes, cuja responsabilidade é exclusiva de seus respectivos fabricantes, importadores e fornecedores, devidamente identificados nos Brindes;</p>
+        <p>(2) Por qualquer aspecto dos produtos, serviços ou ofertas anunciadas nos Materiais Promocionais, cuja responsabilidade é exclusiva de seus respectivos anunciantes;</p>
+        <p>(3) Pelas promoções anunciadas nos Cupons de Desconto, cuja responsabilidade é de seus respectivos emissores;</p>
+        <p>4) Pela não liberação dos serviços de barbearia em razão do fornecimento de dados inverídicos ou desatualizados pelo ASSINANTE;</p>
+        <p>(5) Por quaisquer danos ou prejuízos decorrentes de força maior ou caso fortuito.</p>
+        <p class="term-heading"><strong>10. Vigência e Extinção / Política de Cancelamento</strong></p>
+        <p>Este Termo de Aceite é celebrado pelo prazo de 12 meses conforme opção do ASSINANTE na data de adesão e disponíveis no Website, sendo que a política de cancelamento para cada prazo contratual será:</p>
+        <p>(1) Na hipótese de não cancelamento pelo ASSINANTE o prazo de vigência será por tempo indeterminado</p>
+        <p>O ASSINANTE poderá cancelar a ASSINATURA no prazo de 7 (sete) dias a contar da data de adesão por meio dos canais de comunicação disponibilizados, sendo que, caso o valor já tenha sido debitado do cartão de crédito, o mesmo será estornado pela contratada A R CASTILHO LTDA ao ASSINANTE, nos termos da política de estorno do cartão de crédito do ASSINANTE. Prazo esse nomeado como \"Prazo de Arrependimento\".</p>
+        <p class="term-heading"><strong>Para que o estorno seja efetuado, nenhum serviço poderá ter sido realizado para o assinante.</strong></p>
+        <p>Por tratar-se de um serviço de assinatura, a ASSINATURA poderá ser cancelada, a qualquer tempo, devendo o contratante informar a contratada com 30 dias de antecedência da rescisão contratual, via Email. Após contratada ser notificada do cancelamento da assinatura, fica estipulado que está cobrará do contratante, o mês subsequente ao cancelamento de forma integral.</p>
+        <p>Uma vez feito o cancelamento, o ASSINANTE poderá apenas realizar os serviços na barbearia correspondente(s) ao último pagamento da assinatura realizado.</p>
+        <p>O cancelamento da Assinatura não ilide a responsabilidade das Partes de liquidarem as contraprestações que estiverem pendentes ao tempo do cancelamento, que permanecem exigíveis.</p>
+        <p>Em caso de cancelamento da assinatura após o Período de Arrependimento ter chegado ao fim (quando aplicável), ou antes do fim do período de assinatura atual, nós não reembolsaremos quaisquer taxas de assinatura já pagas a nós. Ficará então disponível a utilização dos serviços conforme modalidade de assinatura escolhida até o vencimento do contrato estipulado na adesão. Não havendo qualquer reembolso financeiro de nenhuma espécie.</p>
+        <p>O não comparecimento do ASSINANTE sem cancelamento prévio do horário agendado por três vezes em um período de três meses pode implicar no cancelamento da assinatura, não podendo mais o ASSINANTE usufruir dos benefícios outrora contratados.</p>
+        <p>Em caso de cancelamento o ASSINANTE deverá aguardar um prazo de 30 (trinta) dias para realizar uma nova assinatura, não sendo possível de maneira alguma efetuar recontratação do plano antes do período de 30 (trinta) dias.</p>
+        <p>Ressaltamos que ao realizar o cancelamento a contagem dos meses para premiação de brindes exclusivos e personalizados Profeta Club, serão zeradas em caso de nova contratação da assinatura.</p>
+        <p>Salientamos que em caso de cancelamento deste plano por parte do cliente, indiferente do motivo, as condições e valores adquiridos neste ato não estão garantidas para adesões futuras, assim, o mesmo fica sujeito a condições futuras, sendo necessária nova contratação de prestação de serviço na modalidade vigente no ato da celebração.</p>
+        <p class="term-heading"><strong>11. Capacidade para Aceitar os Termos e Condições</strong></p>
+        <p>O ASSINANTE afirma ser maior de 18 anos ou ser menor emancipado, ou estar de posse de autorização legal dos pais ou de tutores, e plenamente capaz de consentir com os termos, condições, obrigações, afirmações, representações e garantias descritas neste Termo de Aceite e documentos incorporados.</p>
+        <p class="term-heading"><strong>12. Eventos e Sorteio entre Assinantes</strong></p>
+        <p>A empresa A R CASTILHO LTDA poderá promover eventos relacionados às suas atividades, abertos mediante ingresso, e, a seu critério, realizar sorteio entre os ASSINANTES para concessão de desconto no respectivo ingresso.</p>
+        <p>Participarão do sorteio, salvo disposição diversa no regulamento específico do evento, os ASSINANTES com assinatura ativa e adimplente na data de realização do sorteio.</p>
+        <p>Os ASSINANTES sorteados farão jus a desconto de 20% (vinte por cento) sobre o valor do ingresso do evento a que o sorteio se referir.</p>
+        <p>O benefício de que trata esta Cláusula é pessoal e intransferível, limitado a um ingresso por ASSINANTE sorteado, não é cumulável com outros descontos ou promoções e não poderá ser convertido em dinheiro, crédito ou qualquer outra vantagem.</p>
+        <p>As regras de cada sorteio, período, forma de participação, data e mecânica do sorteio, forma de comunicação dos contemplados e prazo para fruição do desconto, constarão de regulamento específico previamente divulgado pela empresa A R CASTILHO LTDA nos canais indicados na Cláusula 8.</p>
+        <p>A realização dos sorteios aos assinantes observará o princípio da boa-fé e da transparência, ficando a critério da contratada escolher qual será a plataforma ou sistema que realizará o sorteio.</p>
+        <p class="term-heading"><strong>13. Disposição Finais</strong></p>
+        <p>Informações cadastrais. O ASSINANTE autoriza a empresa A R CASTILHO LTDA a divulgar as informações constantes do seu cadastro às autoridades públicas competentes sempre que estas as solicitarem formalmente, nos termos da legislação aplicável.</p>
+        <p>Banco de Dados. O ASSINANTE concorda que a empresa A R CASTILHO LTDA colete informações para realização de acompanhamento de tráfego, com intuito de identificar grupos de perfil de usuários e para fins de orientação publicitária. O ASSINANTE concorda, ainda, que a empresa A R CASTILHO LTDA lhe envie mensagens de e-mail ou outras correspondências de caráter informativo, referentes a comunicações específicas inerentes aos Serviços, bem como mensagens de natureza comercial e promocional.</p>
+        <p>Sucessão. Este Termo de Aceite vincula as Partes e seus sucessores, sejam eles a qualquer título.</p>
+        <p>Cessão. Este Termo de Aceite e quaisquer autorizações aqui previstas não podem ser transferidos ou cedidos pelo ASSINANTE, mas podem ser transferidos pela empresa A R CASTILHO LTDA sem qualquer restrição ou notificação prévia.</p>
+        <p>Rescisão. O Termo de Aceite poderá ser rescindido em caso de infração contratual, caso a Parte infratora não corrija o inadimplemento após a notificação. Caso o ASSINANTE não pague o débito no prazo estipulado em notificação, o Termo de Aceite poderá ser rescindido com a imediata suspensão da Assinatura e consequente suspensão da prestação dos Serviços.</p>
+        <p>Independência entre as cláusulas. Se qualquer disposição deste Termo de Aceite for considerada inválida, inexequível, nula ou sem efeito por qualquer órgão administrativo ou judicial competente, ou se, por força de lei, qualquer disposição se tornar inválida, inexequível, nula ou sem efeito, as demais disposições permanecerão válidas, em pleno vigor e efeito, e as Partes deverão substituir a disposição inválida, inexequível ou nula por outra válida e exequível que corresponda, tanto quanto possível, ao espírito e objetivo da disposição substituída.</p>
+        <p>Lei Aplicável. O presente Termo de Aceite, bem como os direitos e obrigações nele previstos e incorporados, serão regidos e interpretados em conformidade com as leis da República Federativa do Brasil.</p>
+        <p>Responsabilidade. Cada Parte será responsável individualmente pelos atos que praticar, não sendo admitida solidariedade ou subsidiariedade presumidos.</p>
+        <p>Foro. As Partes elegem o foro da cidade de Maringá - PR, para dirimir quaisquer dúvidas ou litígios relacionados a este Termo de Aceite, renunciando a qualquer outro por mais privilegiado que seja.</p>
       </div>
 
       <label class="checkbox-row">
         <input type="checkbox" id="terms-check">
-        <span class="checkbox-label">Li e concordo com os Termos de Uso e autorizo a cobrança mensal de <strong>R$289,00</strong> no meu cartão de crédito.</span>
+        <span class="checkbox-label">Li e concordo com o Contrato de Adesão (Termo de Aceite) acima e autorizo a cobrança mensal no meu cartão de crédito.</span>
       </label>
+
+      <div class="section-sep" style="margin-top:26px;">
+        <div class="section-sep-line"></div>
+        <span class="section-sep-label">Uso de imagem (opcional)</span>
+        <div class="section-sep-line"></div>
+      </div>
+
+      <div class="terms-scroll">
+        <p class="term-heading"><strong>TERMO DE AUTORIZAÇÃO DE USO DA IMAGEM</strong></p>
+        <p>O ASSINANTE autoriza, de forma livre, expressa e informada, a A R CASTILHO LTDA a captar, utilizar, reproduzir e divulgar sua imagem, por meio de fotografias e/ou vídeos dos cortes de cabelo, barba e demais serviços realizados, exclusivamente para fins de divulgação e promoção das atividades da empresa A R CASTILHO LTDA.</p>
+        <p>A autorização abrange a veiculação da imagem em: (i) perfis e páginas da A R CASTILHO LTDA em redes sociais; (ii) website e aplicativos; (iii) materiais promocionais impressos e digitais; e (iv) demais peças publicitárias relacionadas aos serviços de barbearia.</p>
+        <p>A presente autorização é concedida a título gratuito, não gerando ao ASSINANTE qualquer direito a remuneração, contraprestação ou participação nos resultados da divulgação, pelo prazo de <strong>indeterminado</strong> e com abrangência em todo território nacional.</p>
+        <p>A empresa A R CASTILHO LTDA obriga-se a utilizar a imagem do ASSINANTE de forma que não lhe seja ofensiva, vexatória ou atentatória à honra, e a não a vincular a conteúdo ilícito, discriminatório ou estranho à finalidade de divulgação dos serviços aqui prevista.</p>
+        <p>A imagem constitui dado pessoal e será tratada em conformidade com a Lei nº 13.709/2018 (LGPD) e com a Política de Privacidade da empresa A R CASTILHO LTDA, tendo por base legal o consentimento ora manifestado.</p>
+        <p>O consentimento previsto nesta Cláusula é <strong>facultativo e não condiciona a prestação dos Serviços</strong>. O ASSINANTE poderá revogá-lo a qualquer tempo, mediante solicitação por qualquer dos <u>canais de atendimento indicados na Cláusula 8 do contrato de adesão</u>, comprometendo-se a empresa A R CASTILHO LTDA a cessar novas veiculações no prazo de 15 dias, ressalvadas as inserções já realizadas em materiais cuja retirada seja materialmente impossível.</p>
+      </div>
+
+      <div class="image-auth-row">
+        <label class="radio-row">
+          <input type="radio" name="image-auth" id="image-auth-yes" value="autorizo">
+          <span class="checkbox-label">Autorizo o uso da minha imagem nos termos acima</span>
+        </label>
+        <label class="radio-row">
+          <input type="radio" name="image-auth" id="image-auth-no" value="nao_autorizo" checked>
+          <span class="checkbox-label">Não autorizo</span>
+        </label>
+      </div>
 
       <div class="msg" id="msg"></div>
 
