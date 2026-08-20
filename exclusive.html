@@ -475,7 +475,7 @@ function buildWhatsappMessage(){
 
 let waLink='';
 
-document.getElementById('btn-submit').addEventListener('click',()=>{
+document.getElementById('btn-submit').addEventListener('click',async()=>{
   const btn=document.getElementById('btn-submit');
   const spinner=document.getElementById('spinner');
   const btnText=document.getElementById('btn-text');
@@ -487,13 +487,33 @@ document.getElementById('btn-submit').addEventListener('click',()=>{
   const message=buildWhatsappMessage();
   waLink=`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-  setTimeout(()=>{
-    document.getElementById('btn-wa-again').href=waLink;
-    document.getElementById('form-state').style.display='none';
-    document.getElementById('confirm-state').style.display='block';
-    window.open(waLink,'_blank');
-    window.scrollTo({top:0,behavior:'smooth'});
-  },500);
+  // Grava o lead no Supabase antes de abrir o WhatsApp. Não bloqueia o fluxo
+  // se falhar — o time ainda recebe a mensagem no WhatsApp normalmente.
+  try{
+    const leadPayload={
+      name:document.getElementById('name').value.trim(),
+      phone:document.getElementById('phone').value.trim(),
+      email:document.getElementById('email').value.trim(),
+      clienteAtual:document.getElementById('cliente-atual').value,
+      frequencia:document.getElementById('frequencia').value,
+      melhorHorario:document.getElementById('melhor-horario').value,
+      interesses:Array.from(document.querySelectorAll('#interesses-grid input:checked')).map(i=>i.value),
+      observacoes:document.getElementById('observacoes').value.trim(),
+    };
+    await fetch('https://profetamaringa.netlify.app/.netlify/functions/save-exclusive-lead',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(leadPayload)
+    });
+  }catch(saveErr){
+    console.error('Falha ao gravar lead Exclusive no Supabase (segue pro WhatsApp mesmo assim):',saveErr);
+  }
+
+  document.getElementById('btn-wa-again').href=waLink;
+  document.getElementById('form-state').style.display='none';
+  document.getElementById('confirm-state').style.display='block';
+  window.open(waLink,'_blank');
+  window.scrollTo({top:0,behavior:'smooth'});
 });
 </script>
 
