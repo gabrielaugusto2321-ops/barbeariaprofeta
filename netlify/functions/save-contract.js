@@ -13,6 +13,8 @@
 // IMPORTANTE: a service_role key ignora RLS. Ela só pode existir aqui,
 // do lado do servidor. Nunca deve ser exposta no front-end.
 
+const { generateContractPDF } = require("./lib/pdf-contract.js");
+
 function jsonResponse(statusCode, body) {
   return {
     statusCode,
@@ -54,6 +56,29 @@ async function supabaseFetch(path, options, baseUrl, serviceKey) {
   }
 
   return data;
+}
+
+// Sobe um arquivo binário (o PDF) pro Supabase Storage.
+async function supabaseStorageUpload(bucketAndPath, buffer, contentType, baseUrl, serviceKey) {
+  const res = await fetch(`${baseUrl}/storage/v1/object/${bucketAndPath}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": contentType,
+      apikey: serviceKey,
+      Authorization: `Bearer ${serviceKey}`,
+      "x-upsert": "true",
+    },
+    body: buffer,
+  });
+
+  if (!res.ok) {
+    const errText = await res.text().catch(() => "");
+    const err = new Error(`Erro ao subir PDF pro Storage (${res.status}): ${errText}`);
+    err.status = res.status;
+    throw err;
+  }
+
+  return true;
 }
 
 exports.handler = async (event) => {
@@ -173,9 +198,52 @@ exports.handler = async (event) => {
       serviceKey
     );
 
+    // 3) Gera o PDF do contrato e sobe pro Supabase Storage.
+    // Isso não bloqueia a resposta de sucesso pro cliente caso falhe --
+    // o registro em texto na tabela já garante a prova do aceite.
+    let pdfPath = null;
+    try {
+      const pdfBuffer = await generateContractPDF({
+        contractId,
+        plano: plano || null,
+        name,
+        email,
+        cpf,
+        rg,
+        estadoCivil,
+        profissao,
+        endereco,
+        cidade,
+        estado,
+        cep,
+        phone,
+        contractHtml,
+        imageAuthorized: authorized,
+        createdAt: new Date(),
+        ipAddress: remoteIp,
+      });
+
+      pdfPath = `contracts/${contractId}.pdf`;
+      await supabaseStorageUpload(pdfPath, pdfBuffer, "application/pdf", baseUrl, serviceKey);
+
+      await supabaseFetch(
+        `/profeta_signed_contracts?id=eq.${contractId}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({ pdf_path: pdfPath }),
+        },
+        baseUrl,
+        serviceKey
+      );
+    } catch (pdfErr) {
+      console.error("Erro ao gerar/subir PDF do contrato (registro em texto já salvo):", pdfErr.message);
+      pdfPath = null;
+    }
+
     return jsonResponse(200, {
       success: true,
       contractId,
+      pdfPath,
     });
   } catch (err) {
     console.error("Erro ao gravar contrato/autorização no Supabase:", err.message, err.raw);
