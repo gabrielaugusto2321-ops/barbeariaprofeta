@@ -1,0 +1,7 @@
+{
+  "name": "profeta-functions",
+  "private": true,
+  "dependencies": {
+    "pdfkit": "^0.15.0"
+  }
+}
