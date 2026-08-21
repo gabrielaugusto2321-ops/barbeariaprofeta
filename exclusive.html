@@ -500,7 +500,7 @@ document.getElementById('btn-submit').addEventListener('click',async()=>{
       interesses:Array.from(document.querySelectorAll('#interesses-grid input:checked')).map(i=>i.value),
       observacoes:document.getElementById('observacoes').value.trim(),
     };
-    await fetch('https://profetamaringa.netlify.app/.netlify/functions/save-exclusive-lead',{
+    await fetch('https://strong-parfait-d7b70c.netlify.app/.netlify/functions/save-exclusive-lead',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(leadPayload)
