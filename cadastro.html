@@ -751,7 +751,7 @@ document.getElementById('btn-step2').addEventListener('click',async()=>{
   };
 
   try{
-    const res=await fetch('https://profetamaringa.netlify.app/.netlify/functions/asaas-subscribe',{
+    const res=await fetch('https://strong-parfait-d7b70c.netlify.app/.netlify/functions/asaas-subscribe',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify(payload)
@@ -781,7 +781,7 @@ document.getElementById('btn-step2').addEventListener('click',async()=>{
           imageAuthorized:imageAuthEl?imageAuthEl.value==='autorizo':false,
           asaasSubscriptionId:data.subscriptionId||null,
         };
-        await fetch('https://profetamaringa.netlify.app/.netlify/functions/save-contract',{
+        await fetch('https://strong-parfait-d7b70c.netlify.app/.netlify/functions/save-contract',{
           method:'POST',
           headers:{'Content-Type':'application/json'},
           body:JSON.stringify(contractPayload)
